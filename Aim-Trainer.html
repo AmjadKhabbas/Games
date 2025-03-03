@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click the Dot Game</title>
+    <style>
+        #gameArea {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click the Dot Game</h1>
+    <div id="gameArea"></div>
+    <p>Score: <span id="score">0</span></p>
+    <script>
+        let score = 0;
+        let dot = document.createElement('div');
+        dot.classList.add('dot');
+        let gameArea = document.getElementById('gameArea');
+        gameArea.appendChild(dot);
+
+        function moveDot() {
+            let x = Math.random() * (gameArea.clientWidth - dot.clientWidth);
+            let y = Math.random() * (gameArea.clientHeight - dot.clientHeight);
+            dot.style.left = x + 'px';
+            dot.style.top = y + 'px';
+        }
+
+        function updateScore() {
+            score++;
+            document.getElementById('score').innerText = score;
+        }
+
+        dot.addEventListener('click', function() {
+            updateScore();
+            moveDot();
+        });
+
+        function startGame() {
+            moveDot();
+            setInterval(function() {
+                moveDot();
+            }, 2000);
+        }
+
+        startGame();
+    </script>
+</body>
+</html>
